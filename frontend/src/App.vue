@@ -5,8 +5,8 @@
 </template>
 
 <script setup>
-  import { AppLayout } from "@/layouts";
-  import { HomeView } from "@/views";
+import { AppLayout } from "@/layouts";
+import { HomeView } from "@/views";
 </script>
 
 <style lang="scss">
@@ -56,5 +56,4 @@
 //     margin: 0 auto;
 //   }
 // }
-
 </style>
