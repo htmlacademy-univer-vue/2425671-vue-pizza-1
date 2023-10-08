@@ -3,8 +3,8 @@
     <button
       type="button"
       class="counter__button counter__button--minus"
-      disabled
-      @click="$emit('action')"
+      :disabled="count === 0"
+      @click="emits('decrement')"
     >
       <span class="visually-hidden">Меньше</span>
     </button>
@@ -12,7 +12,8 @@
     <button
       type="button"
       class="counter__button counter__button--plus"
-      @click="$emit('action')"
+      :disabled="count === 3"
+      @click="emits('increment')"
     >
       <span class="visually-hidden">Больше</span>
     </button>
@@ -20,10 +21,23 @@
 </template>
 
 <script setup>
-defineProps({
-  count: { type: Number, required: true },
-});
-defineEmits(["action"]);
+  const props = defineProps({
+    count: { type: Number, required: true },
+    ingredient: { type: String, required: true}
+  });
+  const emits = defineEmits(["upgradeIngredientAmount",'increment', 'decrement']);
+
+  // const decrement = () => {
+  //   emits('upgradeIngredientAmount', props.ingredient, props.count-1);
+  //   console.log(props.count);
+  //   console.log(props.ingredient);
+  // };
+
+  // const increment = () => {
+  //   emits('upgradeIngredientAmount', props.ingredient, props.count+1);
+  //   console.log(props.count);
+  //   console.log(props.ingredient);
+  // };
 </script>
 
 <style lang="scss" scoped>
