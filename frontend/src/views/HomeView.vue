@@ -40,9 +40,6 @@ import {
   // общие компоненты
   SheetCard,
   SectionTitle,
-  // NormalButton,
-  // CounterInput,
-  // TextInput,
 } from "../common/components";
 
 import {
@@ -60,8 +57,6 @@ const normalizedIngredients = ingredients.map((ingredient) =>
   normalizeIngredients(ingredient)
 );
 
-
-
   const pizza = reactive({
     name: "",
     size: normalizedSizes[0].size,
@@ -72,10 +67,6 @@ const normalizedIngredients = ingredients.map((ingredient) =>
       return acc;
     }, {}),
   });
-
-  console.log(pizza);
-
-
 
   const price = computed(()=> {
     const { dough, size, sauce, ingredients} = pizza;
@@ -88,17 +79,11 @@ const normalizedIngredients = ingredients.map((ingredient) =>
 
     const ingredientsPrice = normalizedIngredients.map((item)=> ingredients[item.ingredient] * item.price)
     .reduce((acc, item)=> acc + item, 0);
-    // console.log(doughPrice);
-    // console.log(saucePrice);
-    // console.log(ingredientsPrice);
-    // console.log(sizeMult);
-    console.log(pizza.name);
     return (doughPrice + saucePrice + ingredientsPrice) * sizeMult;
   });
 
   const addIngredient = (ingredient)=> {
     pizza.ingredients[ingredient]++;
-    console.log(ingredient);
   }
 
   const upgradeIngredientAmount = (ingredient, count)=> {

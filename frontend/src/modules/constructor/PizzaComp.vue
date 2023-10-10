@@ -10,9 +10,6 @@
       <div class="content__constructor">
         <div class="pizza" :class="`pizza--foundation--${dough}-${sauce}`">
           <div class="pizza__wrapper">
-            <!-- <div class="pizza__filling pizza__filling--ananas"></div>
-            <div class="pizza__filling pizza__filling--bacon"></div>
-            <div class="pizza__filling pizza__filling--cheddar"></div> -->
             <div v-for="(value, key) in pizzaIngredients"
             :key="key"
             class="pizza__filling"
@@ -36,7 +33,7 @@
 
 <script setup>
 import {computed} from "vue";
-import { AppDrop, TextInput } from "../../common/components";
+import { AppDrop, TextInput, NormalButton } from "../../common/components";
 
 const props = defineProps({
   sauce: {
