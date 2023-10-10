@@ -16,7 +16,7 @@
           }}</span></AppDrag
         >
 
-        <CounterInput class="ingredients__counter" :ingredient="ingredient.ingredient" :count="getValue(ingredient.ingredient)" 
+        <AppCounter class="ingredients__counter" :ingredient="ingredient.ingredient" :count="getValue(ingredient.ingredient)" 
         @decrement="decrement(ingredient.ingredient, (getValue(ingredient.ingredient)-1))"
         @increment="increment(ingredient.ingredient, (getValue(ingredient.ingredient)+1))"
         />
@@ -26,8 +26,7 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
-  import { CounterInput, AppDrag } from "../../common/components";
+  import { AppCounter, AppDrag } from "../../common/components";
   const props = defineProps({
     normalizedIngredients: {
       type: Object,
