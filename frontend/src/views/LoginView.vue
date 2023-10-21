@@ -1,3 +1,3 @@
 <template>
-    <h1>Логин</h1>
+  <h1>Логин</h1>
 </template>

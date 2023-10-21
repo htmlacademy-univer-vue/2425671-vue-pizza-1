@@ -13,8 +13,8 @@
           name="dought"
           :value="dough.doughSize"
           class="visually-hidden"
-          @input="emit('update:modelValue', $event.target.value)"
           :checked="dough.doughSize === modelValue"
+          @input="emit('update:modelValue', $event.target.value)"
         />
         <b>{{ dough.name }}</b>
         <span>{{ dough.description }}</span>
@@ -31,9 +31,9 @@ defineProps({
     required: true,
   },
   modelValue: {
-      type: String,
-      required: true,
-    }
+    type: String,
+    required: true,
+  },
 });
 const emit = defineEmits(["update:modelValue"]);
 </script>
