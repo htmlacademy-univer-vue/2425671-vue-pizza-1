@@ -37,7 +37,7 @@
       required: true,
     },
   });
-  // @upgradeIngredientAmount="emits('upgradeIngredientAmount', upgradeIngredientAmount)"
+  
   const emits = defineEmits(['upgradeIngredientAmount'])
 
   const getValue = (ingredient) => {
@@ -46,14 +46,10 @@
   
   const decrement = (ingredient, count) => {
     emits('upgradeIngredientAmount', ingredient, count);
-    console.log(ingredient);
-    console.log(count);
   };
 
   const increment = (ingredient, count) => {
     emits('upgradeIngredientAmount', ingredient, count);
-    console.log(ingredient);
-    console.log(count);
   };
 </script>
 
