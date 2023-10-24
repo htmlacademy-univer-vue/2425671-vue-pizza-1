@@ -28,7 +28,7 @@ import sauces from "../mocks/sauces.json";
 import sizes from "../mocks/sizes.json";
 
 import {
-  // функции нормализации
+  // функции нормализацииb
   normalizeDough,
   normalizeSizes,
   normalizeIngredients,
