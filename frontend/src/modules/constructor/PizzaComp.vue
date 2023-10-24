@@ -10,17 +10,15 @@
       <div class="content__constructor">
         <div class="pizza" :class="`pizza--foundation--${dough}-${sauce}`">
           <div class="pizza__wrapper">
-            <!-- <div class="pizza__filling pizza__filling--ananas"></div>
-            <div class="pizza__filling pizza__filling--bacon"></div>
-            <div class="pizza__filling pizza__filling--cheddar"></div> -->
-            <div v-for="(value, key) in pizzaIngredients"
-            :key="key"
-            class="pizza__filling"
-            :class="[
-              `pizza__filling--${key}`,
-              value === 2 && 'pizza__filling--second',
-              value === 3 && 'pizza__filling--third',
-            ]"
+            <div
+              v-for="(value, key) in pizzaIngredients"
+              :key="key"
+              class="pizza__filling"
+              :class="[
+                `pizza__filling--${key}`,
+                value === 2 && 'pizza__filling--second',
+                value === 3 && 'pizza__filling--third',
+              ]"
             />
           </div>
         </div>
@@ -28,15 +26,15 @@
     </AppDrop>
 
     <div class="content__result">
-      <p>Итого: {{price}} ₽</p>
+      <p>Итого: {{ price }} ₽</p>
       <NormalButton label="Готовьте!" />
     </div>
   </div>
 </template>
 
 <script setup>
-import {computed} from "vue";
-import { AppDrop, TextInput } from "../../common/components";
+import { computed } from "vue";
+import { AppDrop, TextInput, NormalButton } from "../../common/components";
 
 const props = defineProps({
   sauce: {
@@ -54,24 +52,24 @@ const props = defineProps({
   price: {
     type: Number,
     default: 0,
-  }
+  },
 });
 
-const emits = defineEmits(['addIngredient', "update:modelValue"]);
+const emits = defineEmits(["addIngredient", "update:modelValue"]);
 
-const pizzaIngredients = computed(()=> {
-    return Object.entries(props.ingredients).reduce((result, entry)=>{
-      const [key, value] = entry;
-      if (value >0){
-        result[key] = value;
-      }
-      return result;
-    }, {});
-  });
+const pizzaIngredients = computed(() => {
+  return Object.entries(props.ingredients).reduce((result, entry) => {
+    const [key, value] = entry;
+    if (value > 0) {
+      result[key] = value;
+    }
+    return result;
+  }, {});
+});
 
-  const setName = (name) => {
-    emits('update:modelValue', name);
-  }
+const setName = (name) => {
+  emits("update:modelValue", name);
+};
 </script>
 
 <style lang="scss" scoped>

@@ -13,8 +13,8 @@
           name="diameter"
           :value="size.size"
           class="visually-hidden"
-          @input="emit('update:modelValue', $event.target.value)"
           :checked="size.size === modelValue"
+          @input="emit('update:modelValue', $event.target.value)"
         />
         <span>{{ size.name }}</span>
       </label>
@@ -24,15 +24,15 @@
 
 <script setup>
 import { SheetCard } from "../../common/components";
-  defineProps({
-    normalizedSizes: { type: Object, required: true },
-    modelValue: {
-      type: String,
-      required: true,
-    }
-  });
+defineProps({
+  normalizedSizes: { type: Object, required: true },
+  modelValue: {
+    type: String,
+    required: true,
+  },
+});
 
-  const emit = defineEmits(["update:modelValue"])
+const emit = defineEmits(["update:modelValue"]);
 </script>
 
 <style lang="scss" scoped>
