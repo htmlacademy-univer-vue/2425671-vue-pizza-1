@@ -21,17 +21,21 @@ export default [
     children: [],
   },
   {
-    path: "/profile",
-    name: "ProfileView",
-    component: () => import("../views/ProfileView.vue"),
+    path: "/user",
+    name: "UserView",
+    component: () => import("../views/UserView.vue"),
     meta: { layout: "AppLayoutHeader" },
-    children: [],
-  },
-  {
-    path: "/orders",
-    name: "OrdersView",
-    component: () => import("../views/OrdersView.vue"),
-    meta: { layout: "AppLayoutHeader" },
-    children: [],
+    children: [
+      {
+        path: "profile",
+        name: "ProfileView",
+        component: () => import("../views/ProfileView.vue"),
+      },
+      {
+        path: "orders",
+        name: "OrdersView",
+        component: () => import("../views/OrdersView.vue"),
+      },
+    ],
   },
 ];
