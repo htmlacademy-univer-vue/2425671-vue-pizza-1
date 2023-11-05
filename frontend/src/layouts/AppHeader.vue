@@ -11,10 +11,14 @@
       </a>
     </div>
     <div class="header__cart">
-      <a href="cart.html">0 ₽</a>
+      <!-- <a href="cart.html">0 ₽</a> -->
+      <router-link to="/cart">0 ₽</router-link>
     </div>
     <div class="header__user">
-      <a href="#" class="header__login"><span>Войти</span></a>
+      <!-- <a href="#" class="header__login"><span>Войти</span></a> -->
+      <router-link class="header__login" to="/sign-in"
+        ><span>Войти</span></router-link
+      >
     </div>
   </header>
 </template>
