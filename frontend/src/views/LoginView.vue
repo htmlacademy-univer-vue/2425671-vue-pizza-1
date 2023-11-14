@@ -1,8 +1,11 @@
 <template>
   <div class="sign-form">
-    <a href="#" class="close close--white">
+    <!-- <a href="#" class="close close--white">
       <span class="visually-hidden">Закрыть форму авторизации</span>
-    </a>
+    </a> -->
+    <router-link to="/" class="close close--white">
+      <span class="visually-hidden">Закрыть форму авторизации</span>
+    </router-link>
     <div class="sign-form__title">
       <!-- <h1 class="title title--small">Авторизуйтесь на сайте</h1> -->
       <SectionTitle size="small">Авторизуйтесь на сайте</SectionTitle>

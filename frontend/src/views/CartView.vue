@@ -243,9 +243,12 @@
     </main>
     <section class="footer">
       <div class="footer__more">
-        <a href="#" class="button button--border button--arrow"
+        <!-- <a href="#" class="button button--border button--arrow"
           >Хочу еще одну</a
-        >
+        > -->
+        <router-link class="button button--border button--arrow" to="/">
+          Хочу еще одну
+        </router-link>
       </div>
       <p class="footer__text">
         Перейти к конструктору<br />чтоб собрать ещё одну пиццу
