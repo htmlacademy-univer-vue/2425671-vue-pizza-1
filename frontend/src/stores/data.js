@@ -11,4 +11,3 @@ export const useDataStore = defineStore('data', {
 	getters: {},
 	actions: {}
 })
-

@@ -2,15 +2,13 @@ import { defineStore } from 'pinia'
 
 export const useProfileStore = defineStore('profile', {
 	state: () => ({
-		profile: {
-			id: 0,
-			name: "",
-			email: "",
-			avatar: "",
-			phone: "",
-			addresses:[],
-			orders: []
-		},
+		id: 0,
+		name: "",
+		email: "",
+		avatar: "",
+		phone: "",
+		addresses:[],
+		orders: []
 	}),
 	getters: {
 		getAddresses: (state)=> {
