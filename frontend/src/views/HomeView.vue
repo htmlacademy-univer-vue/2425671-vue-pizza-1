@@ -105,6 +105,7 @@ const price = computed(() => {
 
 const addIngredient = (ingredient) => {
   pizza.ingredients[ingredient]++;
+  console.log(pizza);
 };
 
 const upgradeIngredientAmount = (ingredient, count) => {
