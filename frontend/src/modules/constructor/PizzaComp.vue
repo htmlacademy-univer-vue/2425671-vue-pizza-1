@@ -4,20 +4,33 @@
       name="pizza_name"
       label="Название пиццы"
       placeholder="Введите название пиццы"
+      :value="modelValue"
       @input="setName"
     />
-    <AppDrop @drop="emits('addIngredient', $event.ingredient)">
+    <AppDrop
+      @drop="
+        emits('addIngredient', {
+          id: $event.id,
+          ingredient: $event.ingredient,
+          name: $event.name,
+          price: $event.price,
+        })
+      "
+    >
       <div class="content__constructor">
-        <div class="pizza" :class="`pizza--foundation--${dough}-${sauce}`">
+        <div
+          class="pizza"
+          :class="`pizza--foundation--${dough.doughSize}-${sauce.sauce}`"
+        >
           <div class="pizza__wrapper">
             <div
-              v-for="(value, key) in pizzaIngredients"
-              :key="key"
+              v-for="(quantity, ingredient) in pizzaIngredients"
+              :key="ingredient"
               class="pizza__filling"
               :class="[
-                `pizza__filling--${key}`,
-                value === 2 && 'pizza__filling--second',
-                value === 3 && 'pizza__filling--third',
+                `pizza__filling--${ingredient}`,
+                quantity === 2 && 'pizza__filling--second',
+                quantity === 3 && 'pizza__filling--third',
               ]"
             />
           </div>
@@ -27,7 +40,11 @@
 
     <div class="content__result">
       <p>Итого: {{ price }} ₽</p>
-      <NormalButton label="Готовьте!" />
+      <NormalButton
+        :disabled-button="props.disabledButton"
+        label="Готовьте!"
+        @click="emits('addPizza')"
+      />
     </div>
   </div>
 </template>
@@ -38,30 +55,38 @@ import { AppDrop, TextInput, NormalButton } from "../../common/components";
 
 const props = defineProps({
   sauce: {
-    type: String,
+    type: Object,
     required: true,
   },
   dough: {
-    type: String,
+    type: Object,
     required: true,
   },
   ingredients: {
-    type: Object,
+    type: Array,
     required: true,
   },
   price: {
     type: Number,
     default: 0,
   },
+  disabledButton: {
+    type: Boolean,
+    default: true,
+  },
+  modelValue: {
+    type: String,
+    default: "",
+  },
 });
 
-const emits = defineEmits(["addIngredient", "update:modelValue"]);
+const emits = defineEmits(["addIngredient", "update:modelValue", "addPizza"]);
 
 const pizzaIngredients = computed(() => {
-  return Object.entries(props.ingredients).reduce((result, entry) => {
-    const [key, value] = entry;
-    if (value > 0) {
-      result[key] = value;
+  return props.ingredients.reduce((result, ingredientt) => {
+    const { ingredient, quantity } = ingredientt;
+    if (quantity > 0) {
+      result[ingredient] = quantity;
     }
     return result;
   }, {});

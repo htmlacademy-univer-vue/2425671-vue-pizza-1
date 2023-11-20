@@ -13,8 +13,14 @@
           name="dought"
           :value="dough.doughSize"
           class="visually-hidden"
-          :checked="dough.doughSize === modelValue"
-          @input="emit('update:modelValue', $event.target.value)"
+          :checked="dough.doughSize === modelValue.doughSize"
+          @input="
+            emit('update:modelValue', {
+              ...dough,
+              doughSize: $event.target.value,
+              price: dough.price,
+            })
+          "
         />
         <b>{{ dough.name }}</b>
         <span>{{ dough.description }}</span>
@@ -31,7 +37,7 @@ defineProps({
     required: true,
   },
   modelValue: {
-    type: String,
+    type: Object,
     required: true,
   },
 });

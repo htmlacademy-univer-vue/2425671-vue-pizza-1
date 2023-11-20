@@ -1,10 +1,10 @@
 <template>
-    <div class="app_layout">
-      <app-header></app-header>
-      <app-side-bar></app-side-bar>
-      <slot />
-    </div>
-  </template>
+  <div class="app_layout">
+    <app-header></app-header>
+    <app-side-bar></app-side-bar>
+    <slot />
+  </div>
+</template>
 
 <script setup>
 import AppHeader from "./AppHeader.vue";

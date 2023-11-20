@@ -1,27 +1,33 @@
 <template>
   <div class="sign-form">
-    <!-- <a href="#" class="close close--white">
-      <span class="visually-hidden">Закрыть форму авторизации</span>
-    </a> -->
     <router-link to="/" class="close close--white">
       <span class="visually-hidden">Закрыть форму авторизации</span>
     </router-link>
     <div class="sign-form__title">
-      <!-- <h1 class="title title--small">Авторизуйтесь на сайте</h1> -->
       <SectionTitle size="small">Авторизуйтесь на сайте</SectionTitle>
     </div>
-    <form action="test.html" method="post">
+    <form action="test.html" method="post" @submit.prevent="login">
       <div class="sign-form__input">
         <label class="input">
           <span>E-mail</span>
-          <input type="email" name="email" placeholder="example@mail.ru" />
+          <input
+            v-model="user.email"
+            type="email"
+            name="email"
+            placeholder="example@mail.ru"
+          />
         </label>
       </div>
 
       <div class="sign-form__input">
         <label class="input">
           <span>Пароль</span>
-          <input type="password" name="pass" placeholder="***********" />
+          <input
+            v-model="user.password"
+            type="password"
+            name="pass"
+            placeholder="***********"
+          />
         </label>
       </div>
       <button type="submit" class="button">Авторизоваться</button>
@@ -31,6 +37,25 @@
 
 <script setup>
 import { SectionTitle } from "../common/components";
+import { reactive } from "vue";
+import { useRouter } from "vue-router";
+import { useProfileStore } from "../stores";
+
+const router = useRouter();
+const profileStore = useProfileStore();
+
+const user = reactive({
+  email: "",
+  password: "",
+});
+const login = () => {
+  try {
+    profileStore.login(user);
+    router.push("/user");
+  } catch (error) {
+    alert(error);
+  }
+};
 </script>
 
 <style lang="scss" scoped>
