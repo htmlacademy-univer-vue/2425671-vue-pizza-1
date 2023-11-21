@@ -4,34 +4,38 @@
       <div class="content__wrapper">
         <SectionTitle size="big">Конструктор пиццы</SectionTitle>
         <DoughComp
-          v-model="pizza.dough"
-          :normalized-doughs="normalizedDoughs"
+          v-model="pizzaStore.dough"
+          :normalized-doughs="dataStore.dough"
         />
 
-        <SizeComp v-model="pizza.size" :normalized-sizes="normalizedSizes" />
+        <SizeComp
+          v-model="pizzaStore.size"
+          :normalized-sizes="dataStore.sizes"
+        />
 
         <div class="content__ingredients">
           <SheetCard class="ingredients">
             <template #title>Выберите ингредиенты</template>
             <SauceComp
-              v-model="pizza.sauce"
-              :normalized-sauces="normalizedSauces"
+              v-model="pizzaStore.sauce"
+              :normalized-sauces="dataStore.sauce"
             />
             <IngredientsComp
-              :normalized-ingredients="normalizedIngredients"
-              :selected-ingredients="pizza.ingredients"
-              @upgradeIngredientAmount="upgradeIngredientAmount"
+              :normalized-ingredients="dataStore.ingredients"
+              :selected-ingredients="pizzaStore.ingredients"
+              @upgradeIngredientAmount="pizzaStore.upgradeIngredientAmount"
             />
           </SheetCard>
         </div>
-
         <PizzaComp
-          v-model="pizza.name"
-          :sauce="pizza.sauce"
-          :dough="pizza.dough"
-          :ingredients="pizza.ingredients"
-          :price="price"
-          @addIngredient="addIngredient"
+          v-model="pizzaStore.name"
+          :sauce="pizzaStore.sauce"
+          :dough="pizzaStore.dough"
+          :ingredients="pizzaStore.ingredients"
+          :price="pizzaStore.totalPizzaPrice"
+          :disabled-button="buttonDisabled"
+          @addIngredient="pizzaStore.addIngredient"
+          @addPizza="addPizza"
         />
       </div>
     </form>
@@ -39,19 +43,7 @@
 </template>
 
 <script setup>
-import { reactive, computed } from "vue";
-import doughs from "../mocks/dough.json"; // мок данные
-import ingredients from "../mocks/ingredients.json";
-import sauces from "../mocks/sauces.json";
-import sizes from "../mocks/sizes.json";
-
-import {
-  // функции нормализацииb
-  normalizeDough,
-  normalizeSizes,
-  normalizeIngredients,
-  normalizeSauces,
-} from "../common/helpers";
+import { computed } from "vue";
 
 import {
   // общие компоненты
@@ -67,50 +59,37 @@ import {
   PizzaComp,
 } from "../modules/constructor"; // компоненты конструктора пиццы
 
-const normalizedDoughs = doughs.map((dough) => normalizeDough(dough));
-const normalizedSizes = sizes.map((size) => normalizeSizes(size));
-const normalizedSauces = sauces.map((sauce) => normalizeSauces(sauce));
-const normalizedIngredients = ingredients.map((ingredient) =>
-  normalizeIngredients(ingredient)
-);
+import { useDataStore, usePizzaStore, useCartStore } from "../stores";
+import { useRoute } from "vue-router";
+const cartStore = useCartStore();
+const dataStore = useDataStore();
+const pizzaStore = usePizzaStore();
+const route = useRoute();
+const { id } = route.params;
 
-const pizza = reactive({
-  name: "",
-  size: normalizedSizes[0].size,
-  dough: normalizedDoughs[0].doughSize,
-  sauce: normalizedSauces[0].sauce,
-  ingredients: normalizedIngredients.reduce((acc, item) => {
-    acc[item.ingredient] = 0;
-    return acc;
-  }, {}),
-});
+if (id)
+  pizzaStore.setPizzaState(cartStore.pizzas.find((pizza) => pizza.id === +id));
+else
+  pizzaStore.setPizzaState({
+    id: Math.random(),
+    name: "",
+    dough: dataStore.dough[0],
+    size: dataStore.sizes[0],
+    sauce: dataStore.sauce[0],
+    ingredients: [],
+  });
 
-const price = computed(() => {
-  const { dough, size, sauce, ingredients } = pizza;
-
-  const sizeMult =
-    normalizedSizes.find((item) => item.size === size)?.multiplier ?? 1;
-
-  const doughPrice =
-    normalizedDoughs.find((item) => item.doughSize === dough)?.price ?? 0;
-
-  const saucePrice =
-    normalizedSauces.find((item) => item.sauce === sauce)?.price ?? 0;
-
-  const ingredientsPrice = normalizedIngredients
-    .map((item) => ingredients[item.ingredient] * item.price)
-    .reduce((acc, item) => acc + item, 0);
-  return (doughPrice + saucePrice + ingredientsPrice) * sizeMult;
-});
-
-const addIngredient = (ingredient) => {
-  pizza.ingredients[ingredient]++;
-  console.log(pizza);
+const addPizza = () => {
+  if (id) {
+    cartStore.editPizza(pizzaStore.getPizzaInfo);
+  } else {
+    cartStore.addPizza(pizzaStore.getPizzaInfo);
+  }
 };
 
-const upgradeIngredientAmount = (ingredient, count) => {
-  pizza.ingredients[ingredient] = count;
-};
+const buttonDisabled = computed(() => {
+  return pizzaStore.name === "" || pizzaStore.ingredients.length === 0;
+});
 </script>
 
 <style lang="scss" scoped>

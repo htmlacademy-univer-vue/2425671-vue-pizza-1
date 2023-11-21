@@ -13,7 +13,7 @@
       type="button"
       class="counter__button counter__button--plus"
       :class="orange === true && 'counter__button--orange'"
-      :disabled="count === 3"
+      :disabled="count === max"
       @click="emits('increment')"
     >
       <span class="visually-hidden">Больше</span>
@@ -23,8 +23,9 @@
 
 <script setup>
 defineProps({
-  count: { type: Number, required: true },
+  count: { type: Number, default: 0 },
   orange: { type: Boolean, default: false },
+  max: { type: Number, default: 3 },
 });
 const emits = defineEmits(["increment", "decrement"]);
 </script>

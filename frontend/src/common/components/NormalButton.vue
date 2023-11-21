@@ -1,12 +1,21 @@
 <template>
-  <button type="button" class="button" :disabled="disabled">{{ label }}</button>
+  <button
+    type="button"
+    class="button"
+    :disabled="disabledButton"
+    @click="emits('click')"
+  >
+    {{ label }}
+  </button>
 </template>
 
 <script setup>
 defineProps({
   label: { type: String, required: true },
   disabled: { type: Boolean, default: true },
+  disabledButton: { type: Boolean, required: true },
 });
+const emits = defineEmits(["click"]);
 </script>
 
 <style lang="scss" scoped>
