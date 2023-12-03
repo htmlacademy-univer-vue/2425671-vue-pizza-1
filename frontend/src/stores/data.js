@@ -32,7 +32,9 @@ export const useDataStore = defineStore("data", {
       if (res1.__state !== "success") {
         return;
       } else {
-        this.dough = res1.data.map((dough) => normalizeDough(dough));
+        const data = res1.data.slice(0, 2);
+        console.log(data);
+        this.dough = data.map((dough) => normalizeDough(dough));
       }
 
       const res2 = await resources.ingredient.getIngredients();
@@ -40,8 +42,9 @@ export const useDataStore = defineStore("data", {
       if (res1.__state !== "success") {
         return;
       } else {
-        this.ingredients = res2.data.map((ingredient) =>
-           normalizeIngredients(ingredient));
+        const data = res2.data.slice(0, 15);
+        console.log(data);
+        this.ingredients = data.map((ingredient) => normalizeIngredients(ingredient));
       }
 
       const res3 = await resources.misc.getMiscs();
@@ -49,7 +52,9 @@ export const useDataStore = defineStore("data", {
       if (res1.__state !== "success") {
         return;
       } else {
-        this.misc = res3.data;
+        const data = res3.data.slice(0, 3);
+        console.log(data);
+        this.misc = data;
       }
 
       const res4 = await resources.sauce.getSauces();
@@ -57,7 +62,9 @@ export const useDataStore = defineStore("data", {
       if (res1.__state !== "success") {
         return;
       } else {
-        this.sauce = res4.data.map((sauce) => normalizeSauces(sauce));
+        const data = res4.data.slice(0, 2);
+        console.log(data);
+        this.sauce = data.map((sauce) => normalizeSauces(sauce));
       }
 
       const res5 = await resources.size.getSizes();
@@ -65,7 +72,9 @@ export const useDataStore = defineStore("data", {
       if (res1.__state !== "success") {
           return;
       } else {
-        this.sizes = res5.data.map((size) => normalizeSizes(size));
+        const data = res5.data.slice(0, 3);
+        console.log(data);
+        this.sizes = data.map((size) => normalizeSizes(size));
       }
     }
   },

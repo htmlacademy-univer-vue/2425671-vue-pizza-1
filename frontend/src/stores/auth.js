@@ -36,7 +36,7 @@ export const useAuthStore = defineStore('auth', {
 
         async whoAmI () {
 			resources.auth.setAuthHeader(jwtService.getToken());
-            const profileStore = useProfileStore;
+            const profileStore = useProfileStore();
 
             const res1 = await resources.auth.whoAmI();
             if (res1.__state !== "success") {

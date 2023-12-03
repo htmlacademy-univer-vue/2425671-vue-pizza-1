@@ -23,12 +23,12 @@
             <img
                 src="@/assets/img/users/user5.jpg"
                 srcset="@/assets/img/users/user5@2x.jpg"
-                :alt="user.name"
+                :alt="authStore.user.name"
                 width="32"
                 height="32"
             />
           </picture>
-          <span>{{ user.name }}</span></router-link
+          <span>{{ authStore.user.name }}</span></router-link
         >
         <router-link to="/" class="header__logout" @click="authStore.logout"
         ><span>Выйти</span></router-link

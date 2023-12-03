@@ -52,6 +52,7 @@ const user = reactive({
 });
 const login = async () => {
   authStore.login(user);
+  router.push('/user/profile')
 };
 </script>
 
