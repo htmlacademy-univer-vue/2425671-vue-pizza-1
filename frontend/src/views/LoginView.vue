@@ -51,8 +51,7 @@ const user = reactive({
   password: "",
 });
 const login = async () => {
-  const answer = await authStore.login(user);
-  console.log(answer);
+  authStore.login(user);
 };
 </script>
 

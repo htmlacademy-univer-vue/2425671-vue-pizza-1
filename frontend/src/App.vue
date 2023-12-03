@@ -6,9 +6,15 @@
 
 <script setup>
 import { AppLayout } from "@/layouts";
-import { useDataStore } from "./stores";
+import { useDataStore, useAuthStore } from "./stores";
+
 const dataStore = useDataStore();
+const authStore = useAuthStore();
+
 dataStore.fetchdata();
+
+authStore.whoAmI();
+
 </script>
 
 <style lang="scss">
