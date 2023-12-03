@@ -6,7 +6,9 @@
 
 <script setup>
 import { AppLayout } from "@/layouts";
-// import { HomeView } from "@/views";
+import { useDataStore } from "./stores";
+const dataStore = useDataStore();
+dataStore.fetchdata();
 </script>
 
 <style lang="scss">
