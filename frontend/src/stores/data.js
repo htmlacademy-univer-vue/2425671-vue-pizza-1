@@ -7,7 +7,7 @@ import {
   normalizeSizes,
   normalizeIngredients,
   normalizeSauces,
-  normalizeMisc
+  normalizeMisc,
 } from "@/common/helpers";
 
 export const useDataStore = defineStore("data", {
@@ -37,7 +37,9 @@ export const useDataStore = defineStore("data", {
       } else {
         const data = res2.data.slice(0, 15);
         // console.log(data);
-        this.ingredients = data.map((ingredient) => normalizeIngredients(ingredient));
+        this.ingredients = data.map((ingredient) =>
+          normalizeIngredients(ingredient)
+        );
         // console.log(this.ingredients);
       }
 
@@ -64,13 +66,13 @@ export const useDataStore = defineStore("data", {
       const res5 = await resources.size.getSizes();
       // console.log(res5.data)
       if (res1.__state !== "success") {
-          return;
+        return;
       } else {
         const data = res5.data.slice(0, 3);
         // console.log(data);
         this.sizes = data.map((size) => normalizeSizes(size));
         // console.log(this.sizes);
       }
-    }
+    },
   },
 });

@@ -1,4 +1,4 @@
-import {isLogged} from "@/middlewares";
+import { isLogged } from "@/middlewares";
 
 export default [
   {
@@ -53,5 +53,5 @@ export default [
     component: () => import("../views/SuccessView.vue"),
     meta: { layout: "AppLayoutDefault" },
     children: [],
-  }
+  },
 ];

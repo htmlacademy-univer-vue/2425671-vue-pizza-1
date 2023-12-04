@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-import { useDataStore } from "./";
 
 export const useCartStore = defineStore("cart", {
   state: () => ({
@@ -27,30 +26,35 @@ export const useCartStore = defineStore("cart", {
       let filteredPizzas = [];
       let ingredientss = [];
 
-      state.pizzas.map((pizza)=> {
-        pizza.ingredients.map((ingredient)=> ingredientss.push({ingredientId: ingredient.id, quantity: ingredient.quantity}));
+      state.pizzas.map((pizza) => {
+        pizza.ingredients.map((ingredient) =>
+          ingredientss.push({
+            ingredientId: ingredient.id,
+            quantity: ingredient.quantity,
+          })
+        );
         filteredPizzas.push({
           name: pizza.name,
           quantity: pizza.quantity,
           ingredients: ingredientss,
           sauceId: pizza.sauce.id,
           doughId: pizza.dough.id,
-          sizeId: pizza.size.id
-        })
+          sizeId: pizza.size.id,
+        });
       });
       return filteredPizzas;
     },
     getFilteredMiscs: (state) => {
       let filteredMiscs = [];
 
-      state.misc.map((misc)=> {
+      state.misc.map((misc) => {
         filteredMiscs.push({
           miscId: misc.id,
           quantity: misc.quantity,
-        })
+        });
       });
       return filteredMiscs;
-    }
+    },
   },
   actions: {
     addPizza(newPizza) {
@@ -90,9 +94,8 @@ export const useCartStore = defineStore("cart", {
       const miscExist = this.misc.find((item) => item.id === id);
       miscExist.quantity -= 1;
       if (miscExist.quantity === 0) {
-        this.misc = this.misc.filter((misc) => misc.id !== miscExist.id)
+        this.misc = this.misc.filter((misc) => misc.id !== miscExist.id);
       }
-      //this.addresses.splice(index, 1, newAddress);
     },
     clean() {
       this.pizzas = [];
@@ -100,7 +103,7 @@ export const useCartStore = defineStore("cart", {
     },
     setMiscs(miscs) {
       this.misc = miscs;
-      console.log(`miscs: ${this.misc} and ${miscs}`)
+      console.log(`miscs: ${this.misc} and ${miscs}`);
     },
   },
 });

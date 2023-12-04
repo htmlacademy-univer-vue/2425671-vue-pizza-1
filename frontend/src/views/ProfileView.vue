@@ -9,7 +9,10 @@
         <picture>
           <source
             type="image/webp"
-            srcset="@/assets/img/users/user5@2x.webp 1x, @/assets/img/users/user5@4x.webp 2x"
+            srcset="
+              @/assets/img/users/user5@2x.webp 1x,
+              @/assets/img/users/user5@4x.webp 2x
+            "
           />
           <img
             src="@/assets/img/users/user5@2x.jpg"

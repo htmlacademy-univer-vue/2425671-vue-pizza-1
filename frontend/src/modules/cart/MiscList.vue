@@ -7,7 +7,12 @@
         class="additional-list__item sheet"
       >
         <p class="additional-list__description">
-          <img :src="getImageUrl(misc.image)" width="39" height="60" :alt="misc.name" />
+          <img
+            :src="getImageUrl(misc.image)"
+            width="39"
+            height="60"
+            :alt="misc.name"
+          />
           <span>{{ misc.name }}</span>
         </p>
 
@@ -32,7 +37,7 @@
 
 <script setup>
 import { AppCounter } from "../../common/components";
-import { getImageUrl } from "@/common/helpers"
+import { getImageUrl } from "@/common/helpers";
 defineProps({
   miscs: {
     type: Array,
@@ -43,12 +48,12 @@ const emits = defineEmits(["addMisc, deleteMisc"]);
 
 const decrement = (misc) => {
   emits("deleteMisc", misc.id);
-  misc.quantity=misc.quantity-1;
+  misc.quantity = misc.quantity - 1;
 };
 
 const increment = (misc) => {
   emits("addMisc", misc);
-  misc.quantity=misc.quantity+1;
+  misc.quantity = misc.quantity + 1;
 };
 </script>
 
