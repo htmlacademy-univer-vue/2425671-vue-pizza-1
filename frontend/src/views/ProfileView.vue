@@ -14,16 +14,16 @@
           <img
             src="@/assets/img/users/user5@2x.jpg"
             srcset="@/assets/img/users/user5@4x.jpg"
-            :alt="profileStore.name"
+            :alt="authStore.user.name"
             width="72"
             height="72"
           />
         </picture>
         <div class="user__name">
-          <span>{{ profileStore.name }}</span>
+          <span>{{ authStore.user.name }}</span>
         </div>
         <p class="user__phone">
-          Контактный телефон: <span>{{ profileStore.phone }}</span>
+          Контактный телефон: <span>{{ authStore.user.phone }}</span>
         </p>
       </div>
 
@@ -34,7 +34,7 @@
         :address-params="addressParams"
         :action-type="actionType"
         @save="save"
-        @delete="profileStore.deleteAddress(addressParams.id)"
+        @delete="deletee(addressParams.id)"
         @setAddressInfo="setValueAddress"
       />
 
@@ -53,14 +53,14 @@
 
 <script setup>
 import { SectionTitle } from "../common/components";
-import { useProfileStore } from "../stores";
+import { useProfileStore, useAuthStore } from "../stores";
 import { reactive, ref } from "vue";
 import AddressesList from "../modules/profile/AddressesList.vue";
 import AddressForm from "../modules/profile/AddressForm.vue";
 const profileStore = useProfileStore();
+const authStore = useAuthStore();
 const actionType = ref("");
 const opened = ref(false);
-console.log(opened.value);
 
 let addressParams = reactive({
   name: "",
@@ -73,34 +73,35 @@ let addressParams = reactive({
 });
 
 const setValueAddress = (option, value) => {
-  console.log(value);
   addressParams[option] = value;
+};
+
+const deletee = (id) => {
+  profileStore.deleteAddress(id);
+  opened.value = false;
 };
 
 const save = () => {
   if (actionType.value == "edit") {
-    console.log(addressParams);
+    // console.log(addressParams);
     profileStore.editAddress({ ...addressParams, userId: profileStore.id });
   }
   if (actionType.value == "add") {
-    console.log(addressParams);
+    // console.log(addressParams);
     profileStore.addAddress({
       ...addressParams,
-      userId: profileStore.id,
-      id: Math.random(),
+      userId: authStore.user.id,
     });
   }
-  addressParams.id = Math.random();
   addressParams.name = "";
   addressParams.street = "";
   addressParams.building = "";
   addressParams.flat = "";
   addressParams.comment = "";
-  addressParams.userId = profileStore.id;
+  opened.value = false;
 };
 
 const openForm = (action, order) => {
-  console.log("сработало");
   if (action == "edit") {
     actionType.value = "edit";
     opened.value = true;
@@ -116,7 +117,6 @@ const openForm = (action, order) => {
     actionType.value = "add";
     opened.value = true;
   }
-  console.log(addressParams);
 };
 </script>
 

@@ -68,18 +68,32 @@ const route = useRoute();
 
 const router = useRouter();
 const { id } = route.params;
+console.log(`id: ${id}`);
 
 if (id)
   pizzaStore.setPizzaState(cartStore.pizzas.find((pizza) => pizza.id === +id));
-else
-  pizzaStore.setPizzaState({
-    id: Math.random(),
+else {
+  setTimeout(() => {
+    pizzaStore.setPizzaState({
+    id: cartStore.pizzas.length + 1,
     name: "",
     dough: dataStore.dough[0],
     size: dataStore.sizes[0],
     sauce: dataStore.sauce[0],
     ingredients: [],
   });
+  }, "1000");
+  // pizzaStore.setPizzaState({
+  //   id: cartStore.pizzas.length + 1,
+  //   name: "",
+  //   dough: dataStore.dough[0],
+  //   size: dataStore.sizes[0],
+  //   sauce: dataStore.sauce[0],
+  //   ingredients: [],
+  // });
+  // console.log(pizzaStore.size);
+}
+
 
 const addPizza = () => {
   if (id) {
