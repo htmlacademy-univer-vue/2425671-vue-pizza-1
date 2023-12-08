@@ -53,7 +53,10 @@ const user = reactive({
 const login = async () => {
   authStore.login(user);
   authStore.whoAmI();
-  router.push("/user/profile");
+  setTimeout(() => {
+    router.push("/user/profile");
+  }, "1000");
+  // router.push("/user/profile");
 };
 </script>
 
