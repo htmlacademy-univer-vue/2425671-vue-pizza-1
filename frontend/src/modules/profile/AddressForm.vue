@@ -47,7 +47,9 @@
                 name="addr-house"
                 placeholder="Введите номер дома"
                 required
-                @input="emits('setAddressInfo', 'building', $event.target.value)"
+                @input="
+                  emits('setAddressInfo', 'building', $event.target.value)
+                "
               />
             </label>
           </div>

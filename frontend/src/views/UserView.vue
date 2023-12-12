@@ -1,21 +1,20 @@
 <template>
   <!-- <router-view /> -->
   <router-view v-slot="{ Component, route }">
-      <transition name="slide" mode="out-in">
-        <div :key="route.name">
-          <component :is="Component"></component>
-        </div>
-      </transition>
-    </router-view>
+    <transition name="slide" mode="out-in">
+      <div :key="route.name">
+        <component :is="Component"></component>
+      </div>
+    </transition>
+  </router-view>
 </template>
 
 <script setup></script>
 
-
 <style lang="scss">
 @import "@/assets/scss/app.scss";
 .slide-enter-active {
-  transition: all 0.4s
+  transition: all 0.4s;
 }
 .slide-enter {
   opacity: 0;

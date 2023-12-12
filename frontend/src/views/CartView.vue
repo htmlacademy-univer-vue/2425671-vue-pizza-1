@@ -143,7 +143,7 @@ const createOrder = () => {
       flat: address.flat,
       comment: "",
     });
-  } 
+  }
 
   const order = {
     userId: authStore.user?.id ?? null,

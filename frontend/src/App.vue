@@ -29,7 +29,7 @@ authStore.whoAmI();
 <style lang="scss">
 @import "@/assets/scss/app.scss";
 .slide-enter-active {
-  transition: all 0.4s
+  transition: all 0.4s;
 }
 .slide-enter {
   opacity: 0;
